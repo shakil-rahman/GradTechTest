@@ -21,6 +21,7 @@ def createMedalTable(results):
     #Use the results object above to create a medal table
     #The winner gets 3 points, second place 2 points and third place 1 point
     medalTable = {}
+    points = {1:3, 2:2, 3:1}
     #Reversed so that the ordering matches the expected outcome
     for i in reversed(results):
         for countries in i['podium']:
@@ -31,12 +32,7 @@ def createMedalTable(results):
             if country not in medalTable:
                 medalTable[country] = 0
             #Add the points based on the position
-            if position == 1:
-                medalTable[country] += 3
-            elif position == 2:
-                medalTable[country] += 2
-            elif position == 3:
-                medalTable[country] += 1
+            medalTable[country] += points[position]
         #Sorted on the value after the points for each event is processed
         medalTable = dict(sorted(medalTable.items(), key=lambda i: i[1], reverse=True))
     return medalTable
